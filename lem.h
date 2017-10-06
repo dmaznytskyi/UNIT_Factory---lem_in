@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 17:58:20 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:30:55 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init(t_lem *s);
 void	reader(t_lem *s);
 void	destroy(t_lem *s);
 void	print_error(char *text);
+void	num_check(char *s, char *error);
 int		lgnl(char **line, int st);
 int		split_cnt(char **s);
 

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 17:58:17 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:42:56 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,21 @@ int		split_cnt(char **s)
 	while (s[++i] != NULL)
 		;
 	return (i);
+}
+
+void	num_check(char *s, char *error)
+{
+	int	i;
+	int	tmp;
+
+	tmp = ft_strlen(s);
+	i = -1;
+	while (++i < tmp)
+		if (!ft_isdigit(s[i]))
+			print_error(error);
+}
+
+void	new_room(t_lem *s, char *n, int x, int y)
+{
+	
 }
