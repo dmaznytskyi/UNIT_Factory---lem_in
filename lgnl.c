@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem.h                                              :+:      :+:    :+:   */
+/*   lgnl.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 14:45:18 by dmaznyts         ###   ########.fr       */
+/*   Created: 2017/10/06 14:43:05 by dmaznyts          #+#    #+#             */
+/*   Updated: 2017/10/06 14:44:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_H
-# define LEM_H
+#include "lem.h"
 
-# include "libft/libft.h"
-
-typedef struct	s_r
+int	lgnl(char **line, int st)
 {
-	char	*name;		//room name
-	int		x;			//room x coordinate
-	int		y;			//room y coordinate
-}				t_r;
+	char	*b;
+	char	*r;
+	char	*tmp;
 
-typedef struct	s_lem
-{
-	struct s_r	*r;		//array of rooms
-	int			nr;		//number of rooms
-}				t_lem;
-
-void	init(t_lem *s);
-void	read(t_lem *s);
-void	destroy(t_lem *s);
-int		lgnl(char **line, int st);
-
-#endif
+	r = ft_strnew(0);
+	while (!ft_strchr(r, '\n') && st != 0)
+	{
+		b = ft_strnew(1);
+		st = read(0, b, 1);
+		tmp = r;
+		r = ft_strjoin(r, b);
+		ft_strdel(&tmp);
+		ft_strdel(&b);
+	}
+	*line = r;
+	return (st);
+}
