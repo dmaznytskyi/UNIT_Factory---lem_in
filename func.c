@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lgnl.c                                             :+:      :+:    :+:   */
+/*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/06 14:43:05 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 17:03:38 by dmaznyts         ###   ########.fr       */
+/*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
+/*   Updated: 2017/10/06 17:58:17 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 
-int	lgnl(char **line, int st)
+void	print_error(char *error_text)
 {
-	char	*b;
-	char	*r;
-	char	*tmp;
+	ft_putstr("\e[1;31m>>>>>>>>>> ERROR <<<<<<<<<<\e[0m ");
+	ft_putstr(error_text);
+	ft_putchar('\n');
+	exit(0);
+}
 
-	r = ft_strnew(0);
-	b = ft_strnew(1);
-	while (!ft_strchr(r, '\n') && st != 0)
-	{
-		st = read(0, b, 1);
-		tmp = r;
-		r = ft_strjoin(r, b);
-		ft_strdel(&tmp);
-	}
-	if (ft_strlen(r) > 0)
-		st = 1;
-	if (ft_strchr(r, '\n'))
-		r[ft_strlen(r) - 1] = '\0';
-	ft_strdel(&b);
-	*line = r;
-	return (st);
+int		split_cnt(char **s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i] != NULL)
+		;
+	return (i);
 }
