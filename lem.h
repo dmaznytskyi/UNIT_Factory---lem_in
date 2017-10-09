@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 19:30:55 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/09 14:08:26 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 # include "libft/libft.h"
 
-typedef struct	s_l
-{
-	char	*r1;
-	char	*r2;
-}				t_l;
-
 typedef struct	s_r
 {
 	char	*name;		//room name
@@ -28,11 +22,16 @@ typedef struct	s_r
 	int		y;			//room y coordinate
 }				t_r;
 
+typedef struct	s_l		//like linked lists, but...
+{
+	struct s_r	*room;
+	struct s_l	*next;
+}				t_l;
+
 typedef struct	s_lem
 {
 	char		**input;	//all data to print
-	struct s_l	*l;			//array of links
-	struct s_r	*r;			//array of rooms
+	struct s_l	*r;			//linked list of rooms
 	int			nr;			//number of rooms
 	int			an;			//number of ants
 }				t_lem;
@@ -44,5 +43,8 @@ void	print_error(char *text);
 void	num_check(char *s, char *error);
 int		lgnl(char **line, int st);
 int		split_cnt(char **s);
+
+void	rlstadd(t_l **head, t_l *new);
+t_l		*rlstnew(t_r *room);
 
 #endif
