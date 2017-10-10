@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 13:45:27 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 14:18:07 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,27 @@
 
 void	check_room(char **s)
 {
-	num_check(s[1], "invalid room expression");
-	num_check(s[2], "invalid room expression");
+	num_check(s[1], "invalid room expression.");
+	num_check(s[2], "invalid room expression.");
 }
 
-void	nli(char *line, t_lem *s)
+int		check_se(t_lem *s)
 {
-	
+	t_l		*tmp;
+	char	flag;
+
+	tmp = s->r;
+	flag = 0;
+	while (tmp)
+	{
+		if (tmp->s || tmp->e)
+			flag++;
+		tmp = tmp->next;
+	}
+	if (flag == 2)
+		return (1);
+	else
+		return (0);
 }
 
 void	parse_se(t_lem *s, int se, char **tm, t_r *r)
@@ -31,7 +45,7 @@ void	parse_se(t_lem *s, int se, char **tm, t_r *r)
 	if (split_cnt(tm) == 3)
 		check_room(tm);
 	else
-		print_error("invalid room expression");
+		print_error("invalid room expression.");
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	se == 1 ? (s->r->s = 1) :
 		(s->r->e = 1);
@@ -46,7 +60,7 @@ void	parse_room(t_lem *s, char *line, char **tm)
 	if (split_cnt(tm) == 3)
 		check_room(tm);
 	else
-		print_error("invalid room expression");
+		print_error("invalid room expression.");
 	ft_strdel(&line);
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	se == 1 ? (s->r->s = 1) :
@@ -58,7 +72,7 @@ void	parse_room(t_lem *s, char *line, char **tm)
 
 void	ant_num(char *line, t_lem *s)
 {
-	num_check(line, "invalid ant expression");
+	num_check(line, "invalid ant expression.");
 	s->an = ft_atoi(line);
 	if (s->an <= 0)
 		print_error("amount of ants overflowed or less/equal than zero.");
@@ -79,17 +93,27 @@ void	comm(char *line, t_lem *s)
 	}
 }
 
+void	parce_link(s, line)
+{
+	//count number of rooms, make int **arr for links
+	//TODO think about it
+	//lol
+}
+
 void	lorr(char *line, t_lem *s)
 {
 	char	**tm;
 	t_r		*r;
 
-	//if detected link(strchr(-)) - check start/end room existence
 	if (ft_strchr(line, ' '))
 		parse_room(s, line, tm, r);
 	else if (ft_strchr(line, '-'))
+	{
 		if (check_se(s))
 			parce_link(s, line);
+		else
+			print_error("no start/end room.");
+	}
 }
 
 void	reader(t_lem *s)
