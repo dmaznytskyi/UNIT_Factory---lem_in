@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 13:45:28 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 20:56:55 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	num_check(char *s, char *error)
 			print_error(error);
 }
 
-void	*new_room(t_lem *s, char *n, int x, int y)
+void	new_room(t_lem *s, char *n, int x, int y)
 {
 	t_r	*r;
 
@@ -69,4 +69,39 @@ void	add_input(t_lem *s, char *line)
 	tmp = s->input;
 	s->input = ft_strjoin(s->input, line);
 	ft_strdel(&tmp);
+	ft_strdel(&line);
+}
+
+void	enumerate(t_lem *s)
+{
+	int	i;
+	int	j;
+	t_l	*tmp;
+
+	i = -1;
+	tmp = s->r;
+	while (tmp)
+	{
+		tmp->room->nr = ++i;
+		tmp = tmp->next;
+	}
+	s->c = (char**)malloc(sizeof(char*) * ++i);
+	s->c[i] = NULL;
+	j = -1;
+	while (++j < i)
+		s->c[j] = ft_strnew(i);
+}
+
+int		ch_r_name(t_lem *s, char *name)
+{
+	t_l	*tmp;
+
+	tmp = s->r;
+	while (tmp)
+	{
+		if (ft_strequ(tmp->room->name, name) == 1)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

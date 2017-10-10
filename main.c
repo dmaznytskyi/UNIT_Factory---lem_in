@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:27 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 17:58:22 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 20:58:09 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ int	main(void)
 	t_lem	s;
 
 	init(&s);
-	reader(&s);
+	reader_l(&s);
 	return (0);
 }
