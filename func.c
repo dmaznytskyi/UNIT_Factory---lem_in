@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/06 19:42:56 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 13:45:28 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,31 @@ void	num_check(char *s, char *error)
 			print_error(error);
 }
 
-void	new_room(t_lem *s, char *n, int x, int y)
+void	*new_room(t_lem *s, char *n, int x, int y)
 {
-	
+	t_r	*r;
+
+	r = (t_r*)malloc(sizeof(t_r));
+	r->name = ft_strdup(n);
+	ft_strdel(&n);
+	r->x = x;
+	r->y = y;
+	r->s = 0;
+	r->e = 0;
+	if (!s->r)
+		s->r = rlstnew(r);
+	else
+		rlstadd(&s->r, rlstnew(r));
+}
+
+void	add_input(t_lem *s, char *line)
+{
+	char	*tmp;
+
+	tmp = s->input;
+	s->input = ft_strjoin(s->input, "\n");
+	ft_strdel(&tmp);
+	tmp = s->input;
+	s->input = ft_strjoin(s->input, line);
+	ft_strdel(&tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/09 14:08:26 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 13:45:32 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct	s_r
 	char	*name;		//room name
 	int		x;			//room x coordinate
 	int		y;			//room y coordinate
+	char	s;			//is start room
+	char	e;			//is end room
 }				t_r;
 
 typedef struct	s_l		//like linked lists, but...
@@ -30,7 +32,7 @@ typedef struct	s_l		//like linked lists, but...
 
 typedef struct	s_lem
 {
-	char		**input;	//all data to print
+	char		*input;		//all data to print
 	struct s_l	*r;			//linked list of rooms
 	int			nr;			//number of rooms
 	int			an;			//number of ants
@@ -41,6 +43,8 @@ void	reader(t_lem *s);
 void	destroy(t_lem *s);
 void	print_error(char *text);
 void	num_check(char *s, char *error);
+void	new_room(t_lem *s, char *n, int x, int y);
+void	add_input(t_lem *s, char *line);
 int		lgnl(char **line, int st);
 int		split_cnt(char **s);
 
