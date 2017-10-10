@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 20:57:59 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 21:24:35 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	add_input(t_lem *s, char *line);
 void	enumerate(t_lem *s);
 int		lgnl(char **line, int st);
 int		split_cnt(char **s);
+int		ch_r_name(t_lem *s, char *name);
+int		ch_r_coord(t_lem *s, char *name);
 
 
 void	rlstadd(t_l **head, t_l *new);

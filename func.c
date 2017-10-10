@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 20:56:55 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 21:24:30 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	new_room(t_lem *s, char *n, int x, int y)
 	r = (t_r*)malloc(sizeof(t_r));
 	r->name = ft_strdup(n);
 	ft_strdel(&n);
+	if (ch_r_name(s, name))
+		print_error("room with this name already exists");
+	if (ch_r_name(s, name))
+		print_error("room with this coordinates already exists");
 	r->x = x;
 	r->y = y;
 	r->s = 0;
@@ -100,6 +104,20 @@ int		ch_r_name(t_lem *s, char *name)
 	while (tmp)
 	{
 		if (ft_strequ(tmp->room->name, name) == 1)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int		ch_r_coord(t_lem *s, int x, int y)
+{
+	t_l	*tmp;
+
+	tmp = s->r;
+	while (tmp)
+	{
+		if (tmp->room->x == x && tmp->room->y == y)
 			return (1);
 		tmp = tmp->next;
 	}
