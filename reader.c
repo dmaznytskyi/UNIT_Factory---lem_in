@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 14:18:07 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/10 16:36:59 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,8 @@ void	comm(char *line, t_lem *s)
 
 void	parce_link(s, line)
 {
-	//count number of rooms, make int **arr for links
-	//TODO think about it
-	//lol
+	//count number of rooms, enumarate them,
+	//	make array of linked-list rooms
 }
 
 void	lorr(char *line, t_lem *s)
