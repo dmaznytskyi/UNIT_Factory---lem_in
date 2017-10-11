@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 22:02:45 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:28:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		split_cnt(char **s)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (s[++i] != NULL)
 		;
 	return (i);

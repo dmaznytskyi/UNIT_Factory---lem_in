@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 22:01:53 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:42:43 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	parse_room(t_lem *s, char *line, char **tm)
 		check_room(tm);
 	else
 		print_error("invalid room expression.");
-	ft_strdel(&line);
 //	printf("on parsing |%s|%d|%d|\n", tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	ft_strdel(&tm[1]);
@@ -149,11 +148,8 @@ void	parce_link(t_lem *s, char *line)
 		if (!ch_r_name(s, tm[0]) || !ch_r_name(s, tm[1]))
 			print_error("link to non existing room.");
 		else
-		{
-			
-		}
+			new_link(s, tm[0], tm[1]);
 	}
-	//make array of connections of rooms
 }
 
 void	lorr(char *line, t_lem *s, char *n)
@@ -168,6 +164,7 @@ void	lorr(char *line, t_lem *s, char *n)
 		if (check_se(s))
 		{
 			!(*n) ? enumerate(s) : 0;
+			*n = 1;
 			parce_link(s, line);
 		}
 		else
@@ -178,14 +175,11 @@ void	lorr(char *line, t_lem *s, char *n)
 void	reader_l(t_lem *s)
 {
 	char	*line;
-	int		i;
 	char	n;
 
-	i = -1;
 	n = 0;
-	while (lgnl(&line, 1) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
-		++i;
 		if (ft_isdigit(line[0]) && s->an == -1)
 			ant_num(line, s);
 		else if (line[0] == '#')

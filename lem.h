@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 16:59:10 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:03:46 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_lem
 }				t_lem;
 
 void	init(t_lem *s);
+void	algo(t_lem *s);
 void	reader_l(t_lem *s);
 void	destroy(t_lem *s);
 void	print_error(char *text);
