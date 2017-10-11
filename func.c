@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 21:24:30 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:16:20 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ void	new_room(t_lem *s, char *n, int x, int y)
 	t_r	*r;
 
 	r = (t_r*)malloc(sizeof(t_r));
+	if (ch_r_name(s, n))
+		print_error("room with this name already exists");
+	if (ch_r_coord(s, x, y))
+		print_error("room with this coordinates already exists");
 	r->name = ft_strdup(n);
 	ft_strdel(&n);
-	if (ch_r_name(s, name))
-		print_error("room with this name already exists");
-	if (ch_r_name(s, name))
-		print_error("room with this coordinates already exists");
 	r->x = x;
 	r->y = y;
 	r->s = 0;
 	r->e = 0;
+	printf("new room |%s|%d|%d|\n", r->name, r->x, r->y);
 	if (!s->r)
 		s->r = rlstnew(r);
 	else
@@ -94,19 +95,22 @@ void	enumerate(t_lem *s)
 	j = -1;
 	while (++j < i)
 		s->c[j] = ft_strnew(i);
+	free(tmp);
 }
 
-int		ch_r_name(t_lem *s, char *name)
+int		ch_r_name(t_lem *s, char *n)
 {
 	t_l	*tmp;
 
 	tmp = s->r;
 	while (tmp)
 	{
-		if (ft_strequ(tmp->room->name, name) == 1)
+		printf("on check room name |%s|%s|\n", tmp->room->name, n);
+		if (ft_strequ(tmp->room->name, n))
 			return (1);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (0);
 }
 
@@ -121,5 +125,6 @@ int		ch_r_coord(t_lem *s, int x, int y)
 			return (1);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (0);
 }

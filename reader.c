@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 21:24:32 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:17:44 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	parse_room(t_lem *s, char *line, char **tm)
 	else
 		print_error("invalid room expression.");
 	ft_strdel(&line);
+	printf("on parsing |%s|%d|%d|\n", tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
@@ -83,7 +84,6 @@ void	ant_num(char *line, t_lem *s)
 	s->an = ft_atoi(line);
 	if (s->an <= 0)
 		print_error("amount of ants overflowed or less/equal than zero.");
-	ft_strdel(&line);
 }
 
 void	comm(char *line, t_lem *s)

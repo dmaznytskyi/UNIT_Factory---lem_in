@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 13:58:13 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/10 13:45:30 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:26:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ t_l		*rlstnew(t_r *room)
 	if (!room)
 		new->room = NULL;
 	else
-		new->room = room;
+	{
+		new->room = (t_r*)malloc(sizeof(t_r));
+		new->room->name = ft_strdup(room->name);
+		new->room->x = room->x;
+		new->room->y = room->y;
+	}
 	new->next = NULL;
 	return (new);
 }
