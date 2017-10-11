@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 17:45:49 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 22:01:53 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,33 @@ void	comm(char *line, t_lem *s)
 	}
 }
 
+int		get_nr(t_lem *s, char *n)
+{
+	t_l	*tmp;
+
+	tmp = s->r;
+	while (tmp)
+	{
+		if (ft_strequ(tmp->room->name, n))
+			return (tmp->room->nr);
+		tmp = tmp->next;
+	}
+	return (-1);
+}
+
+void	new_link(t_lem *s, char *l1, char *l2)
+{
+	int	nr1;
+	int	nr2;
+
+	nr1 = get_nr(s, l1);
+	nr2 = get_nr(s, l2);
+	if (!s->c[nr1][nr2])
+		s->c[nr1][nr2] = 1;
+	else
+		ft_putstr("Warning! Link already exists!");
+}
+
 void	parce_link(t_lem *s, char *line)
 {
 	char	**tm;
@@ -119,7 +146,12 @@ void	parce_link(t_lem *s, char *line)
 		print_error("invalid link expression.");
 	else
 	{
-		(void)s;
+		if (!ch_r_name(s, tm[0]) || !ch_r_name(s, tm[1]))
+			print_error("link to non existing room.");
+		else
+		{
+			
+		}
 	}
 	//make array of connections of rooms
 }
