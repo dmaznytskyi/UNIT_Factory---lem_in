@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 22:28:47 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 23:17:22 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,23 @@ void	add_input(t_lem *s, char *line)
 	char	*tmp;
 
 	tmp = s->input;
-	s->input = ft_strjoin(s->input, "\n");
+	if (!s->input)
+		s->input = ft_strdup(line);
+	else
+		s->input = ft_strjoin(s->input, line);
 	ft_strdel(&tmp);
+	if (s->tmp)
+	{
+		tmp = s->input;
+		s->input = ft_strjoin(s->input, "\n");
+		ft_strdel(&tmp);
+		tmp = s->input;
+		s->input = ft_strjoin(s->input, s->tmp);
+		ft_strdel(&tmp);
+		ft_strdel(&s->tmp);
+	}
 	tmp = s->input;
-	s->input = ft_strjoin(s->input, line);
+	s->input = ft_strjoin(s->input, "\n");
 	ft_strdel(&tmp);
 	ft_strdel(&line);
 }

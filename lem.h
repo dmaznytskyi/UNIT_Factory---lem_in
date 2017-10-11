@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 22:03:46 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 23:17:25 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_lem
 	int			an;			//number of ants
 	char		hs;			//have start
 	char		he;			//have end
+	char		*tmp;
 }				t_lem;
 
 void	init(t_lem *s);

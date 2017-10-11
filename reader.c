@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 22:42:43 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 23:17:23 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	parse_se(t_lem *s, int se, char **tm)
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
 	free(tm);
+	s->tmp = ft_strdup(tmp);
+	ft_strdel(&tmp);
 }
 
 void	parse_room(t_lem *s, char *line, char **tm)
