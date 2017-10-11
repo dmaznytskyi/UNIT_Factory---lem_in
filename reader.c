@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 17:17:44 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:45:49 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	parse_room(t_lem *s, char *line, char **tm)
 	else
 		print_error("invalid room expression.");
 	ft_strdel(&line);
-	printf("on parsing |%s|%d|%d|\n", tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
+//	printf("on parsing |%s|%d|%d|\n", tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
@@ -93,10 +93,20 @@ void	comm(char *line, t_lem *s)
 	tm = NULL;
 	if (line[1] == '#')
 	{
-		if (ft_strequ(line, "##start\0") == 1 && !s->hs)
-			parse_se(s, 1, tm);
+		if (ft_strequ(line, "##start\0") == 1)
+		{
+			if (!s->hs)
+				parse_se(s, 1, tm);
+			else
+				print_error("map can contain only one start");
+		}
 		else if (ft_strequ(line, "##end\0") == 1 && !s->he)
-			parse_se(s, 0, tm);
+		{
+			if (!s->he)
+				parse_se(s, 0, tm);
+			else
+				print_error("map can contain only one end");
+		}
 	}
 }
 

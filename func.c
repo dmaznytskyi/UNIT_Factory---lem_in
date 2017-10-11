@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 17:16:20 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/11 17:37:06 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	new_room(t_lem *s, char *n, int x, int y)
 	r->y = y;
 	r->s = 0;
 	r->e = 0;
-	printf("new room |%s|%d|%d|\n", r->name, r->x, r->y);
+//	printf("new room |%s|%d|%d|\n", r->name, r->x, r->y);
 	if (!s->r)
 		s->r = rlstnew(r);
 	else
@@ -105,7 +105,7 @@ int		ch_r_name(t_lem *s, char *n)
 	tmp = s->r;
 	while (tmp)
 	{
-		printf("on check room name |%s|%s|\n", tmp->room->name, n);
+//		printf("on check room name |%s|%s|\n", tmp->room->name, n);
 		if (ft_strequ(tmp->room->name, n))
 			return (1);
 		tmp = tmp->next;
