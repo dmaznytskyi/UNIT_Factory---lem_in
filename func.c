@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 23:17:22 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 15:42:43 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,18 @@ void	add_input(t_lem *s, char *line)
 void	enumerate(t_lem *s)
 {
 	int	i;
-	int	j;
 	t_l	*tmp;
 
-	i = -1;
+	i = 0;
 	tmp = s->r;
 	while (tmp)
 	{
-		tmp->room->nr = ++i;
+		tmp->room->nr = i;
 		tmp = tmp->next;
+		i++;
 	}
-	s->c = (char**)malloc(sizeof(char*) * ++i);
-	s->c[i] = NULL;
-	j = -1;
-	while (++j < i)
-		s->c[j] = ft_strnew(i);
+	s->dim = i;
+	init_links(s);
 	free(tmp);
 }
 

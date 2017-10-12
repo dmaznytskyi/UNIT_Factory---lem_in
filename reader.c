@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 23:17:23 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 15:34:26 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,11 @@ void	check_room(char **s)
 	num_check(s[2], "invalid room expression.");
 }
 
-int		check_se(t_lem *s)
-{
-	t_l		*tmp;
-	char	flag;
-
-	tmp = s->r;
-	flag = 0;
-	while (tmp)
-	{
-		if (tmp->room->s || tmp->room->e)
-			flag++;
-		tmp = tmp->next;
-	}
-	if (flag == 2)
-		return (1);
-	else
-		return (0);
-}
-
 void	parse_se(t_lem *s, int se, char **tm)
 {
 	char	*tmp;
 
-	lgnl(&tmp, 1);
+	get_next_line(0, &tmp);
 	tm = ft_strsplit(tmp, ' ');
 	if (split_cnt(tm) == 3)
 		check_room(tm);
@@ -51,11 +32,13 @@ void	parse_se(t_lem *s, int se, char **tm)
 	if (se == 1)
 	{
 		s->r->room->s = 1;
+		s->r->room->e = 0;
 		s->hs = 1;
 	}
 	else
 	{
 		s->r->room->e = 1;
+		s->r->room->s = 0;
 		s->he = 1;
 	}
 	ft_strdel(&tm[1]);
@@ -101,7 +84,7 @@ void	comm(char *line, t_lem *s)
 			else
 				print_error("map can contain only one start");
 		}
-		else if (ft_strequ(line, "##end\0") == 1 && !s->he)
+		else if (ft_strequ(line, "##end\0") == 1)
 		{
 			if (!s->he)
 				parse_se(s, 0, tm);
@@ -133,9 +116,12 @@ void	new_link(t_lem *s, char *l1, char *l2)
 	nr1 = get_nr(s, l1);
 	nr2 = get_nr(s, l2);
 	if (!s->c[nr1][nr2])
+	{
 		s->c[nr1][nr2] = 1;
+		s->c[nr2][nr1] = 1;
+	}
 	else
-		ft_putstr("Warning! Link already exists!");
+		ft_putstr("Warning! Link already exists!\n");
 }
 
 void	parce_link(t_lem *s, char *line)
@@ -163,7 +149,7 @@ void	lorr(char *line, t_lem *s, char *n)
 		parse_room(s, line, tm);
 	else if (ft_strchr(line, '-'))
 	{
-		if (check_se(s))
+		if (s->hs && s->he)
 		{
 			!(*n) ? enumerate(s) : 0;
 			*n = 1;

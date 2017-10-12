@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 23:17:25 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 15:34:37 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct	s_r
 	char	*name;		//room name
 	int		x;			//room x coordinate
 	int		y;			//room y coordinate
-	char	s;			//is start room
-	char	e;			//is end room
+	int		s;			//is start room
+	int		e;			//is end room
 	int		nr;			//room number
 }				t_r;
 
@@ -36,15 +36,17 @@ typedef struct	s_lem
 {
 	char		*input;		//all data to print
 	struct s_l	*r;			//linked list of rooms
-	char		**c;		//1-0 array of connection
+	int			**c;		//1-0 array of connection
+	int			dim;		//dimension of link arr
 	int			nr;			//number of rooms
 	int			an;			//number of ants
-	char		hs;			//have start
-	char		he;			//have end
+	int			hs;			//have start
+	int			he;			//have end
 	char		*tmp;
 }				t_lem;
 
 void	init(t_lem *s);
+void	init_links(t_lem *s);
 void	algo(t_lem *s);
 void	reader_l(t_lem *s);
 void	destroy(t_lem *s);

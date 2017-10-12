@@ -6,11 +6,28 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:37:22 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/11 23:15:07 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 15:42:57 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
+
+void	init_links(t_lem *s)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	s->c = (int**)malloc(sizeof(int*) * s->dim);
+	while (++i < s->dim)
+	{
+		s->c[i] = (int*)malloc(sizeof(int) * s->dim);
+		j = -1;
+		while (++j < s->dim)
+			s->c[i][j] = 0;
+	}
+	s->c[s->dim] = NULL;
+}
 
 void	init(t_lem *s)
 {
@@ -19,4 +36,5 @@ void	init(t_lem *s)
 	s->hs = 0;
 	s->he = 0;
 	s->tmp = NULL;
+	s->input = NULL;
 }
