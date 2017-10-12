@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 15:34:37 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 18:47:36 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_lem
 	int			an;			//number of ants
 	int			hs;			//have start
 	int			he;			//have end
+	int			rl;			//room entry lock
 	char		*tmp;
 }				t_lem;
 
@@ -59,7 +60,7 @@ int		lgnl(char **line, int st);
 int		split_cnt(char **s);
 int		ch_r_name(t_lem *s, char *name);
 int		ch_r_coord(t_lem *s, int x, int y);
-
+int		ch_l_avail(t_lem *s);
 
 void	rlstadd(t_l **head, t_l *new);
 t_l		*rlstnew(t_r *room);

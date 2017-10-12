@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 15:42:43 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 18:56:56 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	new_room(t_lem *s, char *n, int x, int y)
 	t_r	*r;
 
 	r = (t_r*)malloc(sizeof(t_r));
+	if (n[0] == 'L')
+		print_error("room name cannot start with L(see pdf)");
 	if (ch_r_name(s, n))
 		print_error("room with this name already exists");
 	if (ch_r_coord(s, x, y))
@@ -88,6 +90,22 @@ void	add_input(t_lem *s, char *line)
 	s->input = ft_strjoin(s->input, "\n");
 	ft_strdel(&tmp);
 	ft_strdel(&line);
+}
+
+int		ch_l_avail(t_lem *s)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < s->dim)
+	{
+		j = -1;
+		while (++j < s->dim)
+			if (s->c[i][j] == 1)
+				return (1);
+	}
+	return (0);
 }
 
 void	enumerate(t_lem *s)

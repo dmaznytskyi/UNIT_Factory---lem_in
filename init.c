@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:37:22 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 15:42:57 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 17:56:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init(t_lem *s)
 	s->an = -1;
 	s->hs = 0;
 	s->he = 0;
+	s->rl = 0;
 	s->tmp = NULL;
 	s->input = NULL;
 }

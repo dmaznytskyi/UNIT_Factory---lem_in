@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 15:34:26 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/12 18:45:06 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	lorr(char *line, t_lem *s, char *n)
 	char	**tm;
 
 	tm = NULL;
-	if (ft_strchr(line, ' '))
+	if (ft_strchr(line, ' ') && s->rl == 0 && s->an != -1)
 		parse_room(s, line, tm);
 	else if (ft_strchr(line, '-'))
 	{
@@ -153,11 +153,14 @@ void	lorr(char *line, t_lem *s, char *n)
 		{
 			!(*n) ? enumerate(s) : 0;
 			*n = 1;
+			s->rl = 1;
 			parce_link(s, line);
 		}
 		else
 			print_error("no start/end room.");
 	}
+	else
+		print_error("wrong input structure.");
 }
 
 void	reader_l(t_lem *s)
@@ -168,6 +171,8 @@ void	reader_l(t_lem *s)
 	n = 0;
 	while (get_next_line(0, &line) > 0)
 	{
+		if (line[0] == '\0')
+			print_error("empty line.");
 		if (ft_isdigit(line[0]) && s->an == -1)
 			ant_num(line, s);
 		else if (line[0] == '#')
