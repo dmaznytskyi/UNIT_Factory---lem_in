@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:27 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 18:48:27 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/13 12:34:35 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	main(void)
 	reader_l(&s);
 	if (!ch_l_avail(&s))
 		print_error("no links entered.");
+	if (!se_link(&s, 's') || !se_link(&s, 'e'))
+		print_error("no link to start or end room.");
+	ft_putstr(s.input);
 	algo(&s);
 	return (0);
 }

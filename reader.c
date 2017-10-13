@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 18:45:06 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/13 13:08:03 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	parse_room(t_lem *s, char *line, char **tm)
 		check_room(tm);
 	else
 		print_error("invalid room expression.");
-//	printf("on parsing |%s|%d|%d|\n", tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
@@ -92,6 +91,34 @@ void	comm(char *line, t_lem *s)
 				print_error("map can contain only one end");
 		}
 	}
+}
+
+int		get_s(t_lem *s)
+{
+	t_l	*tmp;
+
+	tmp = s->r;
+	while (tmp)
+	{
+		if (tmp->room->s == 1)
+			return (tmp->room->nr);
+		tmp = tmp->next;
+	}
+	return (-1);
+}
+
+int		get_e(t_lem *s)
+{
+	t_l	*tmp;
+
+	tmp = s->r;
+	while (tmp)
+	{
+		if (tmp->room->e == 1)
+			return (tmp->room->nr);
+		tmp = tmp->next;
+	}
+	return (-1);
 }
 
 int		get_nr(t_lem *s, char *n)

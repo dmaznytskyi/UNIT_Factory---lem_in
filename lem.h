@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/12 18:47:36 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/13 15:57:10 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct	s_r
 	int		nr;			//room number
 }				t_r;
 
+typedef struct	s_ch	//chain connection structure
+{
+	int	*chain;
+	int	length;
+	int end;
+}				t_ch;
+
 typedef struct	s_l		//like linked lists, but...
 {
 	struct s_r	*room;
@@ -36,6 +43,8 @@ typedef struct	s_lem
 {
 	char		*input;		//all data to print
 	struct s_l	*r;			//linked list of rooms
+	struct s_ch	*ch_a;		//array of chains
+	int			ch_cnt;		//total amount of chains
 	int			**c;		//1-0 array of connection
 	int			dim;		//dimension of link arr
 	int			nr;			//number of rooms
@@ -56,11 +65,14 @@ void	num_check(char *s, char *error);
 void	new_room(t_lem *s, char *n, int x, int y);
 void	add_input(t_lem *s, char *line);
 void	enumerate(t_lem *s);
-int		lgnl(char **line, int st);
 int		split_cnt(char **s);
 int		ch_r_name(t_lem *s, char *name);
 int		ch_r_coord(t_lem *s, int x, int y);
 int		ch_l_avail(t_lem *s);
+int		se_link(t_lem *s, char what);
+int		get_nr(t_lem *s, char *n);
+int		get_s(t_lem *s);
+int		get_e(t_lem *s);
 
 void	rlstadd(t_l **head, t_l *new);
 t_l		*rlstnew(t_r *room);
