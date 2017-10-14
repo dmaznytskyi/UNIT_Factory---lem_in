@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/13 15:57:08 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:56:01 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,64 +180,60 @@ int		smth_left(t_lem *s, int x, int y)
 	return (0);
 }
 
-int		on_ch(t_lem *s, int what)
+int		on_ch(t_lem *s, int what, int ch_loc)
 {
 	int	i;
 
 	i = -1;
-	while (++i < s->ch_a->length)
-		if (s->ch_a->chain[i] == what)
+	while (++i < s->ch_a[ch_loc]->length)
+		if (s->ch_a[ch_loc]->chain[i] == what)
 			return (1);
 	return (0);
 }
 
-void	add_room(t_lem *s, int nr)
+void	add_room(t_lem *s, int nr, int ch_loc)
 {
 	int	*upd;
 	int	i;
 
 	i = -1;
-	s->ch_a->length++;
-	upd = (int*)malloc(sizeof(int) * s->ch_a->length);
-	while (++i < s->ch_a->length - 1)
-		upd[i] = s->ch_a->chain[i];
+	s->ch_a[ch_loc]->length++;
+	upd = (int*)malloc(sizeof(int) * s->ch_a[ch_loc]->length);
+	while (++i < s->ch_a[ch_loc]->length - 1)
+		upd[i] = s->ch_a[ch_loc]->chain[i];
 	upd[i] = nr;
-	free(s->ch_a->chain);
-	s->ch_a->chain = upd;
+	free(s->ch_a[ch_loc]->chain);
+	s->ch_a[ch_loc]->chain = upd;
 	if (nr == get_e(s))
-		s->ch_a->end = 1;
+		s->ch_a[ch_loc]->end = 1;
 }
 
-void	fork(t_lem *s)
+void	fork_chain(t_lem *s)
 {
 	//realloc memory for chain array
 	//rewrite last chain to free space
 	//допихать чейн_локейшн во все функции с чейном
 }
 
-void	find_ways(t_lem *s, int to)
+void	find_ways(t_lem *s, int to, int ch_loc)
 {
 	//скипать если номер комнаты в цикле содержится в чейне
 	//если номер комнаты == енду, останавливать поиск пути, вычислять его длину
 	//если енд не достижим - кидать эрор (хоть это и не правильно)
-	t_ch	*chain;
 	int		i;
-	int		ch_loc;
 
-	ch_loc = 0;
-	chain = (t_ch*)malloc(sizeof(t_ch) * s->ch_cnt);
-	s->ch_a[ch_loc] = chain;
 	i = -1;
 	while (++i < s->dim)
 	{
-		if (s->c[to][i] == 1 && !on_ch(s, i))
+		if (s->c[to][i] == 1 && !on_ch(s, i, ch_loc))
 		{
-			add_room(s, i);
-			find_ways(s, i);
+			add_room(s, i, ch_loc);
+			find_ways(s, i, ch_loc);
 			if (smth_left(s, to, i))
 			{
 				s->ch_cnt++;
-				fork(s);
+				fork_chain(s);
+				ch_loc++;
 			}
 		}
 	}

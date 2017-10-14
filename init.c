@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:37:22 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/13 15:57:11 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/14 18:23:46 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	init_links(t_lem *s)
 
 void	init(t_lem *s)
 {
-	s->ch_a = NULL;
 	s->ch_cnt = 1;
+	s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
 	s->nr = 0;
 	s->an = -1;
 	s->hs = 0;

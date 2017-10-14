@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/13 15:57:10 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/14 20:56:03 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct	s_lem
 {
 	char		*input;		//all data to print
 	struct s_l	*r;			//linked list of rooms
-	struct s_ch	*ch_a;		//array of chains
+	struct s_ch	**ch_a;		//array of chains
 	int			ch_cnt;		//total amount of chains
 	int			**c;		//1-0 array of connection
 	int			dim;		//dimension of link arr
