@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/14 20:56:01 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/15 14:23:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ void	add_room(t_lem *s, int nr, int ch_loc)
 	while (++i < s->ch_a[ch_loc]->length - 1)
 		upd[i] = s->ch_a[ch_loc]->chain[i];
 	upd[i] = nr;
-	free(s->ch_a[ch_loc]->chain);
+//	free(s->ch_a[ch_loc]->chain);
 	s->ch_a[ch_loc]->chain = upd;
 	if (nr == get_e(s))
 		s->ch_a[ch_loc]->end = 1;
@@ -213,6 +213,22 @@ void	fork_chain(t_lem *s)
 	//realloc memory for chain array
 	//rewrite last chain to free space
 	//допихать чейн_локейшн во все функции с чейном
+	t_ch	**new_ch;
+	int		i;
+	int		j;
+
+	i = -1;
+	s->ch_cnt++;
+	new_ch = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
+	while (++i < s->ch_cnt - 1)
+		new_ch[i] = s->ch_a[i];
+	new_ch[i] = (t_ch*)malloc(sizeof(t_ch) * s->ch_a[i - 1]->length);
+	new_ch[i]->chain = (int*)malloc(sizeof(int) * s->ch_a[i - 1]->length + 1);
+	j = -1;
+	while (++j < s->ch_a[i - 1]->length)
+		new_ch[i]->chain[j] = s->ch_a[i - 1]->chain[j];
+//	free(s->ch_a);
+	s->ch_a = new_ch;
 }
 
 void	find_ways(t_lem *s, int to, int ch_loc)
@@ -231,7 +247,6 @@ void	find_ways(t_lem *s, int to, int ch_loc)
 			find_ways(s, i, ch_loc);
 			if (smth_left(s, to, i))
 			{
-				s->ch_cnt++;
 				fork_chain(s);
 				ch_loc++;
 			}
