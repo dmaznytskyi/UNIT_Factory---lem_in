@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/15 14:23:47 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/15 21:56:15 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,8 +229,9 @@ void	fork_chain(t_lem *s)
 		new_ch[i]->chain[j] = s->ch_a[i - 1]->chain[j];
 //	free(s->ch_a);
 	s->ch_a = new_ch;
+	find_ways(s, get_s(s), get_e(s), i - 1);
 }
-
+/*
 void	find_ways(t_lem *s, int to, int ch_loc)
 {
 	//скипать если номер комнаты в цикле содержится в чейне
@@ -252,4 +253,28 @@ void	find_ways(t_lem *s, int to, int ch_loc)
 			}
 		}
 	}
+}*/
+
+void	find_ways(t_lem *s, int start, int end, int ch)
+{
+	int	r1;
+	int	r2;
+
+	r1 = start;
+	r2 = -1;
+	while (++r2 < s->dim)
+	{
+		if (s->c[r1][r2] == 1 && !on_ch(s, r1, ch))
+		{
+			add_room(s, r1, ch);
+			if (r1 == end)
+				break ;
+			r1 = r2;
+			r2 = -1;
+		}
+	}
+	if (ch < 10)
+		fork_chain(s);
+	if (r2 == s->dim && r1 == end)
+		print_error("no error (just kidding)");
 }

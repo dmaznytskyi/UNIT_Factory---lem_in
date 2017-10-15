@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/15 13:31:53 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/15 21:56:17 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	new_room(t_lem *s, char *n, int x, int y);
 void	add_input(t_lem *s, char *line);
 void	enumerate(t_lem *s);
 
-void	find_ways(t_lem *s, int to, int ch_loc);
+void	find_ways(t_lem *s, int start, int end, int ch_loc);
 
 int		split_cnt(char **s);
 int		ch_r_name(t_lem *s, char *name);
