@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/13 13:08:03 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/16 20:24:55 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@ void	check_room(char **s)
 {
 	num_check(s[1], "invalid room expression.");
 	num_check(s[2], "invalid room expression.");
+}
+
+void	case_se(t_lem *s, int a)
+{
+	if (a == 1)
+	{
+		s->r->room->s = 1;
+		s->r->room->e = 0;
+		s->hs = 1;
+	}
+	else
+	{
+		s->r->room->e = 1;
+		s->r->room->s = 0;
+		s->he = 1;
+	}
 }
 
 void	parse_se(t_lem *s, int se, char **tm)
@@ -29,18 +45,7 @@ void	parse_se(t_lem *s, int se, char **tm)
 	else
 		print_error("invalid room expression.");
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
-	if (se == 1)
-	{
-		s->r->room->s = 1;
-		s->r->room->e = 0;
-		s->hs = 1;
-	}
-	else
-	{
-		s->r->room->e = 1;
-		s->r->room->s = 0;
-		s->he = 1;
-	}
+	case_se(s, se);
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
 	free(tm);

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:04:10 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/15 21:56:13 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/16 21:26:29 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	algo(t_lem *s)
 		i++;
 		printf("\n");
 	}
-	find_ways(s, get_s(s), get_e(s), 0);
+	find_ways(s, get_s(s));
 	i = -1;
 	while (++i < s->ch_cnt)
 	{

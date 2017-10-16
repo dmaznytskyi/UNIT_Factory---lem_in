@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/15 21:56:15 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/16 21:26:26 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		se_link(t_lem *s, char what)
 	int	rn;
 	int	i;
 
-	what == 's' ? (rn = get_s(s)) : 
+	what == 's' ? (rn = get_s(s)) :
 		(rn = get_e(s));
 	i = -1;
 	while (++i < s->dim)
@@ -135,6 +135,7 @@ void	enumerate(t_lem *s)
 		i++;
 	}
 	s->dim = i;
+	s->nr = i;
 	init_links(s);
 	free(tmp);
 }
@@ -169,112 +170,104 @@ int		ch_r_coord(t_lem *s, int x, int y)
 	return (0);
 }
 
-int		smth_left(t_lem *s, int x, int y)
+int		on_ar(t_lem *s, int i)
 {
-	while (y < s->dim)
+	int	tmp;
+
+	tmp = -1;
+	if (!s->vis)
+		return (0);
+	while (++tmp < s->nr)
+		if (s->vis[tmp] == i)
+			return (1);
+	return (0);
+}
+
+void	add_to_ar(t_lem *s, int nr)
+{
+	int	i;
+
+	i = -1;
+	if (!s->vis)
 	{
-		if (s->c[x][y] == 1)
-			return (1);
-		y++;
+		s->vis = (int*)malloc(sizeof(int) * s->nr);
+		while (++i < s->nr)
+			s->vis[i] = -1;
+		s->vis[0] = nr;
 	}
-	return (0);
+	else
+	{
+		while (s->vis[++i] != -1)
+			;
+		s->vis[i] = nr;
+	}
 }
 
-int		on_ch(t_lem *s, int what, int ch_loc)
+void	write_to_way_arr(t_lem *s)
 {
-	int	i;
-
-	i = -1;
-	while (++i < s->ch_a[ch_loc]->length)
-		if (s->ch_a[ch_loc]->chain[i] == what)
-			return (1);
-	return (0);
-}
-
-void	add_room(t_lem *s, int nr, int ch_loc)
-{
-	int	*upd;
-	int	i;
-
-	i = -1;
-	s->ch_a[ch_loc]->length++;
-	upd = (int*)malloc(sizeof(int) * s->ch_a[ch_loc]->length);
-	while (++i < s->ch_a[ch_loc]->length - 1)
-		upd[i] = s->ch_a[ch_loc]->chain[i];
-	upd[i] = nr;
-//	free(s->ch_a[ch_loc]->chain);
-	s->ch_a[ch_loc]->chain = upd;
-	if (nr == get_e(s))
-		s->ch_a[ch_loc]->end = 1;
-}
-
-void	fork_chain(t_lem *s)
-{
-	//realloc memory for chain array
-	//rewrite last chain to free space
-	//допихать чейн_локейшн во все функции с чейном
 	t_ch	**new_ch;
 	int		i;
 	int		j;
 
+	j = -1;
 	i = -1;
 	s->ch_cnt++;
 	new_ch = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
-	while (++i < s->ch_cnt - 1)
-		new_ch[i] = s->ch_a[i];
-	new_ch[i] = (t_ch*)malloc(sizeof(t_ch) * s->ch_a[i - 1]->length);
-	new_ch[i]->chain = (int*)malloc(sizeof(int) * s->ch_a[i - 1]->length + 1);
+	if (s->ch_a)
+	{
+		while (++i < s->ch_cnt - 1)
+			new_ch[i] = s->ch_a[i];
+//		free(s->ch_a);
+		s->ch_a = new_ch;
+	}
+	else
+		s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
+	s->ch_a[i] = (t_ch*)malloc(sizeof(t_ch));
+	s->ch_a[i]->chain = (int*)malloc(sizeof(int) * s->nr);
 	j = -1;
-	while (++j < s->ch_a[i - 1]->length)
-		new_ch[i]->chain[j] = s->ch_a[i - 1]->chain[j];
-//	free(s->ch_a);
-	s->ch_a = new_ch;
-	find_ways(s, get_s(s), get_e(s), i - 1);
+	while (++j < s->nr)
+		s->ch_a[i]->chain[j] = s->vis[j];
+	free(s->vis);
 }
-/*
-void	find_ways(t_lem *s, int to, int ch_loc)
+
+void	del_fr_ar(t_lem *s)
 {
-	//скипать если номер комнаты в цикле содержится в чейне
-	//если номер комнаты == енду, останавливать поиск пути, вычислять его длину
-	//если енд не достижим - кидать эрор (хоть это и не правильно)
-	int		i;
+	int	i;
+
+	i = -1;
+	while (s->vis[++i] >= 0 && i < s->nr)
+		;
+	s->vis[i - 1] = -1;
+}
+
+void	find_ways(t_lem *s, int st)
+{
+	int	i;
 
 	i = -1;
 	while (++i < s->dim)
 	{
-		if (s->c[to][i] == 1 && !on_ch(s, i, ch_loc))
+		if (s->c[st][i] == 1 && !on_ar(s, i))
 		{
-			add_room(s, i, ch_loc);
-			find_ways(s, i, ch_loc);
-			if (smth_left(s, to, i))
+			add_to_ar(s, i);
+			int abc = -1;
+			while (++abc < s->nr)
+				printf("%d ", s->vis[abc]);
+			printf("\n");
+			find_ways(s, i);
+			if (i == get_e(s))
 			{
-				fork_chain(s);
-				ch_loc++;
+				printf("final way to write\n");
+				int abc = -1;
+				while (++abc < s->nr)
+					printf("|%d %s|", s->vis[abc], get_name(s, s->vis[abc]));
+				printf("\n");
+				write_to_way_arr(s);
+				del_fr_ar(s);
+				return ;
 			}
 		}
 	}
-}*/
-
-void	find_ways(t_lem *s, int start, int end, int ch)
-{
-	int	r1;
-	int	r2;
-
-	r1 = start;
-	r2 = -1;
-	while (++r2 < s->dim)
-	{
-		if (s->c[r1][r2] == 1 && !on_ch(s, r1, ch))
-		{
-			add_room(s, r1, ch);
-			if (r1 == end)
-				break ;
-			r1 = r2;
-			r2 = -1;
-		}
-	}
-	if (ch < 10)
-		fork_chain(s);
-	if (r2 == s->dim && r1 == end)
-		print_error("no error (just kidding)");
+	del_fr_ar(s);
+	return ;
 }
