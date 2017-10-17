@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/16 20:24:55 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 19:06:29 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,9 @@ void	parce_link(t_lem *s, char *line)
 		else
 			new_link(s, tm[0], tm[1]);
 	}
+	ft_strdel(&tm[0]);
+	ft_strdel(&tm[1]);
+//	free(tm);
 }
 
 void	lorr(char *line, t_lem *s, char *n)

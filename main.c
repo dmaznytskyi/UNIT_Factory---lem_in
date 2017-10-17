@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:27 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/15 13:05:07 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 18:52:10 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	main(void)
 		print_error("no link to start or end room.");
 	ft_putstr(s.input);
 	algo(&s);
+	while (1)
+		;
 	return (0);
 }

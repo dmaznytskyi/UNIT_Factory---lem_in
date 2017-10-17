@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/17 17:50:36 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 19:47:05 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,22 +209,22 @@ void	write_to_way_arr(t_lem *s)
 	int		i;
 	int		j;
 
-	j = -1;
-	i = -1;
+	j = 0;
+	i = 0;
 	s->ch_cnt++;
 	new_ch = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
 	if (s->ch_a)
 	{
-		while (++i < s->ch_cnt - 1)
+		while (i < s->ch_cnt - 1)
+		{
 			new_ch[i] = s->ch_a[i];
+			i++;
+		}
 //		free(s->ch_a);
 		s->ch_a = new_ch;
 	}
 	else
-	{
 		s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
-		s->ch_a[0]->length = 0;
-	}
 	s->ch_a[i] = (t_ch*)malloc(sizeof(t_ch));
 	s->ch_a[i]->chain = (int*)malloc(sizeof(int) * s->nr);
 	s->ch_a[i]->length = 0;
