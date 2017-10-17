@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/17 19:47:05 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 21:01:01 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		split_cnt(char **s)
 	int	i;
 
 	i = 0;
-	while (s[++i] != NULL)
-		;
+	while (s[i] != NULL)
+		i++;
 	return (i);
 }
 
@@ -50,7 +50,7 @@ void	num_check(char *s, char *error)
 	int	tmp;
 
 	tmp = ft_strlen(s);
-	i = -1;
+	i = 0;
 	while (++i < tmp)
 		if (!ft_isdigit(s[i]))
 			print_error(error);
@@ -68,7 +68,6 @@ void	new_room(t_lem *s, char *n, int x, int y)
 	if (ch_r_coord(s, x, y))
 		print_error("room with this coordinates already exists");
 	r->name = ft_strdup(n);
-	ft_strdel(&n);
 	r->x = x;
 	r->y = y;
 	r->s = 0;
@@ -220,7 +219,6 @@ void	write_to_way_arr(t_lem *s)
 			new_ch[i] = s->ch_a[i];
 			i++;
 		}
-//		free(s->ch_a);
 		s->ch_a = new_ch;
 	}
 	else
@@ -234,7 +232,6 @@ void	write_to_way_arr(t_lem *s)
 		s->ch_a[i]->length += 1;
 	}
 	s->ch_a[i]->chain[s->ch_a[i]->length] = get_e(s);
-//	free(s->vis);
 }
 
 void	del_fr_ar(t_lem *s)
@@ -254,21 +251,11 @@ void	find_ways(t_lem *s, int st)
 	i = -1;
 	while (++i < s->dim)
 	{
-//		printf("i is %d		from room %d\n", i, st);
 		if (s->c[st][i] == 1 && !on_ar(s, i) && i != get_s(s))
 		{
 			add_to_ar(s, i);
-//			int abc = -1;
-//			while (++abc < s->nr)
-//				printf("%d ", s->vis[abc]);
-//			printf("\n");
 			if (i == get_e(s))
 			{
-//				printf("final way to write\n");
-//				int abc = -1;
-//				while (++abc < s->nr)
-//					printf("|%d \"%s\"|", s->vis[abc], get_name(s, s->vis[abc]));
-//				printf("\n");
 				write_to_way_arr(s);
 				del_fr_ar(s);
 			}
@@ -276,7 +263,6 @@ void	find_ways(t_lem *s, int st)
 				find_ways(s, i);
 		}
 	}
-//	printf("last element deleted\n");
 	del_fr_ar(s);
 	return ;
 }

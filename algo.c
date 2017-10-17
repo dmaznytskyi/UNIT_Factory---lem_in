@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:04:10 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/17 18:40:22 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 19:59:56 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,6 @@ void	algo(t_lem *s)
 	ft_putchar('\n');
 	int i = 0;
 	int j = 0;
-//	while (i < s->dim)
-//	{
-//		j = 0;
-//		while (j < s->dim)
-//		{
-//			printf("%d ", s->c[i][j]);
-//			j++;
-//		}
-//		i++;
-//		printf("\n");
-//	}
-//	i = 0;
-//	while (i < s->dim)
-//	{
-//		printf("%d = name %s\n", i, get_name(s, i));
-//		i++;
-//	}
 	find_ways(s, get_s(s));
 	i = -1;
 	while (++i < s->ch_cnt)
@@ -57,10 +40,4 @@ void	algo(t_lem *s)
 			printf("|%s|->", get_name(s, s->ch_a[i]->chain[j]));
 		printf("\n");
 	}
-//	i = 0;
-//	j = 0;
-//	while (++i < s->an)
-//	{
-//		printf("L%d-%s\n", i, get_name(s, s->ch_a[0]->chain[++j]));
-//	}
 }

@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/17 19:06:29 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 20:10:44 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	parse_se(t_lem *s, int se, char **tm)
 		print_error("invalid room expression.");
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
 	case_se(s, se);
+	ft_strdel(&tm[0]);
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
 	free(tm);
@@ -61,6 +62,7 @@ void	parse_room(t_lem *s, char *line, char **tm)
 	else
 		print_error("invalid room expression.");
 	new_room(s, tm[0], ft_atoi(tm[1]), ft_atoi(tm[2]));
+	ft_strdel(&tm[0]);
 	ft_strdel(&tm[1]);
 	ft_strdel(&tm[2]);
 	free(tm);
@@ -109,6 +111,7 @@ int		get_s(t_lem *s)
 			return (tmp->room->nr);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (-1);
 }
 
@@ -123,6 +126,7 @@ int		get_e(t_lem *s)
 			return (tmp->room->nr);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (-1);
 }
 
@@ -137,6 +141,7 @@ int		get_nr(t_lem *s, char *n)
 			return (tmp->room->nr);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (-1);
 }
 
