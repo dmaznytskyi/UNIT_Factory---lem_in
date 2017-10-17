@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/16 21:26:26 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 15:09:59 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ void	write_to_way_arr(t_lem *s)
 	j = -1;
 	while (++j < s->nr)
 		s->ch_a[i]->chain[j] = s->vis[j];
+	s->ch_a[i]->chain[j] = get_e(s);
 	free(s->vis);
 }
 
@@ -260,7 +261,7 @@ void	find_ways(t_lem *s, int st)
 				printf("final way to write\n");
 				int abc = -1;
 				while (++abc < s->nr)
-					printf("|%d %s|", s->vis[abc], get_name(s, s->vis[abc]));
+					printf("|%d \"%s\"|", s->vis[abc], get_name(s, s->vis[abc]));
 				printf("\n");
 				write_to_way_arr(s);
 				del_fr_ar(s);

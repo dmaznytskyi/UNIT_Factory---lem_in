@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:04:10 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/16 21:26:29 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 15:10:00 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,24 @@ void	algo(t_lem *s)
 		i++;
 		printf("\n");
 	}
+	i = 0;
+	while (i < s->dim)
+	{
+		printf("%d = name %s\n", i, get_name(s, i));
+		i++;
+	}
 	find_ways(s, get_s(s));
-	i = -1;
-	while (++i < s->ch_cnt)
-	{
-		j = -1;
-		while (++j < s->ch_a[i]->length)
-			printf("|%d|->", s->ch_a[i]->chain[j]);
-		printf("\n");
-	}
-	j = 0;
-	while (++i < s->an)
-	{
-		printf("L%d-%s\n", i, get_name(s, s->ch_a[0]->chain[++j]));
-	}
+//	i = -1;
+//	while (++i < s->ch_cnt)
+//	{
+//		j = -1;
+//		while (++j < s->ch_a[i]->length)
+//			printf("|%d|->", s->ch_a[i]->chain[j]);
+//		printf("\n");
+//	}
+//	j = 0;
+//	while (++i < s->an)
+//	{
+//		printf("L%d-%s\n", i, get_name(s, s->ch_a[0]->chain[++j]));
+//	}
 }
