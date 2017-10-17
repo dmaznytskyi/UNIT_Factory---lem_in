@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/17 15:09:59 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/17 17:50:36 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,14 +221,20 @@ void	write_to_way_arr(t_lem *s)
 		s->ch_a = new_ch;
 	}
 	else
+	{
 		s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
+		s->ch_a[0]->length = 0;
+	}
 	s->ch_a[i] = (t_ch*)malloc(sizeof(t_ch));
 	s->ch_a[i]->chain = (int*)malloc(sizeof(int) * s->nr);
-	j = -1;
-	while (++j < s->nr)
-		s->ch_a[i]->chain[j] = s->vis[j];
-	s->ch_a[i]->chain[j] = get_e(s);
-	free(s->vis);
+	s->ch_a[i]->length = 0;
+	while (s->ch_a[i]->length < s->nr)
+	{
+		s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
+		s->ch_a[i]->length += 1;
+	}
+	s->ch_a[i]->chain[s->ch_a[i]->length] = get_e(s);
+//	free(s->vis);
 }
 
 void	del_fr_ar(t_lem *s)
@@ -248,27 +254,29 @@ void	find_ways(t_lem *s, int st)
 	i = -1;
 	while (++i < s->dim)
 	{
-		if (s->c[st][i] == 1 && !on_ar(s, i))
+//		printf("i is %d		from room %d\n", i, st);
+		if (s->c[st][i] == 1 && !on_ar(s, i) && i != get_s(s))
 		{
 			add_to_ar(s, i);
-			int abc = -1;
-			while (++abc < s->nr)
-				printf("%d ", s->vis[abc]);
-			printf("\n");
-			find_ways(s, i);
+//			int abc = -1;
+//			while (++abc < s->nr)
+//				printf("%d ", s->vis[abc]);
+//			printf("\n");
 			if (i == get_e(s))
 			{
-				printf("final way to write\n");
-				int abc = -1;
-				while (++abc < s->nr)
-					printf("|%d \"%s\"|", s->vis[abc], get_name(s, s->vis[abc]));
-				printf("\n");
+//				printf("final way to write\n");
+//				int abc = -1;
+//				while (++abc < s->nr)
+//					printf("|%d \"%s\"|", s->vis[abc], get_name(s, s->vis[abc]));
+//				printf("\n");
 				write_to_way_arr(s);
 				del_fr_ar(s);
-				return ;
 			}
+			else
+				find_ways(s, i);
 		}
 	}
+//	printf("last element deleted\n");
 	del_fr_ar(s);
 	return ;
 }
