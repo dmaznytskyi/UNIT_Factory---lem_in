@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 14:36:31 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/04 13:32:54 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/18 13:54:22 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_strdel(char **as)
 {
-	if (!as && !*as)
+	if (!as || !*as)
 		return ;
 	free(*as);
 	*as = NULL;

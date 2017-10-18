@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:04:10 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/17 19:59:56 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:54:47 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*get_name(t_lem *s, int nr)
 			return (tmp->room->name);
 		tmp = tmp->next;
 	}
+	free(tmp);
 	return (0);
 }
 
