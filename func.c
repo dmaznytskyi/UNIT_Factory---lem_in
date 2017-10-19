@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/18 20:01:44 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/19 13:22:36 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	enumerate(t_lem *s)
 	s->dim = i;
 	s->nr = i;
 	init_links(s);
-	free(tmp);
+	//free(tmp);
 }
 
 int		ch_r_name(t_lem *s, char *n)
@@ -150,7 +150,6 @@ int		ch_r_name(t_lem *s, char *n)
 			return (1);
 		tmp = tmp->next;
 	}
-	free(tmp);
 	return (0);
 }
 
@@ -165,7 +164,6 @@ int		ch_r_coord(t_lem *s, int x, int y)
 			return (1);
 		tmp = tmp->next;
 	}
-	free(tmp);
 	return (0);
 }
 
@@ -201,12 +199,46 @@ void	add_to_ar(t_lem *s, int nr)
 		s->vis[i] = nr;
 	}
 }
+/*
+   void	write_to_way_arr(t_lem *s)
+   {
+   t_ch	**new_ch;
+   int		i;
+   int		j;
 
-void	write_to_way_arr(t_lem *s)
+   j = 0;
+   i = 0;
+   s->ch_cnt++;
+   if (s->ch_a)
+   {
+   new_ch = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
+   while (i < s->ch_cnt - 1)
+   {
+   new_ch[i] = s->ch_a[i];
+   i++;
+   }
+   free(s->ch_a);
+   s->ch_a = new_ch;
+   }
+   else
+   s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
+   s->ch_a[i] = (t_ch*)malloc(sizeof(t_ch));
+   s->ch_a[i]->chain = (int*)malloc(sizeof(int) * s->nr);
+   s->ch_a[i]->length = 0;
+   while (s->ch_a[i]->length < s->nr)
+   {
+   s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
+   s->ch_a[i]->length += 1;
+   }
+   s->ch_a[i]->chain[s->ch_a[i]->length] = get_e(s);
+   }*/
+
+void write_to_way_arr(t_lem *s)
 {
-	t_ch	**new_ch;
-	int		i;
-	int		j;
+	t_ch **new_ch = NULL;
+	t_ch **tmp = NULL;
+	int  i;
+	int  j;
 
 	j = 0;
 	i = 0;
@@ -219,8 +251,9 @@ void	write_to_way_arr(t_lem *s)
 			new_ch[i] = s->ch_a[i];
 			i++;
 		}
-		free(s->ch_a);
+		tmp = s->ch_a;
 		s->ch_a = new_ch;
+		free(tmp);
 	}
 	else
 		s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
@@ -232,7 +265,7 @@ void	write_to_way_arr(t_lem *s)
 		s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
 		s->ch_a[i]->length += 1;
 	}
-	s->ch_a[i]->chain[s->ch_a[i]->length] = get_e(s);
+	s->ch_a[i]->chain[s->ch_a[i]->length - 1] = get_e(s);
 }
 
 void	del_fr_ar(t_lem *s)

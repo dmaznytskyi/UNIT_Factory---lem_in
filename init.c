@@ -40,4 +40,7 @@ void	init(t_lem *s)
 	s->tmp = NULL;
 	s->input = NULL;
 	s->r = NULL;
+	s->ch_a = NULL;
+	s->c = NULL;
+	s->vis = NULL;
 }

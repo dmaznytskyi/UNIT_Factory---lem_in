@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include <stdio.h>///////////////
 
-# define LEAK system("leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 1) | cut -d ' ' -f 2) && leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 1) | cut -d ' ' -f 1)");
+# define LEAK system("leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 2) | cut -d ' ' -f 1) && leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 2) | cut -d ' ' -f 3)");
 
 typedef struct	s_r
 {

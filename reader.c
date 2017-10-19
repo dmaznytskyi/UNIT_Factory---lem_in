@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/18 19:52:30 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/19 12:44:32 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int		get_s(t_lem *s)
 			return (tmp->room->nr);
 		tmp = tmp->next;
 	}
-	free(tmp);
 	return (-1);
 }
 
@@ -126,7 +125,6 @@ int		get_e(t_lem *s)
 			return (tmp->room->nr);
 		tmp = tmp->next;
 	}
-	free(tmp);
 	return (-1);
 }
 
@@ -141,7 +139,6 @@ int		get_nr(t_lem *s, char *n)
 			return (tmp->room->nr);
 		tmp = tmp->next;
 	}
-	free(tmp);
 	return (-1);
 }
 
@@ -177,7 +174,7 @@ void	parce_link(t_lem *s, char *line)
 	}
 	ft_strdel(&tm[0]);
 	ft_strdel(&tm[1]);
-//	free(tm);
+	free(tm);
 }
 
 void	lorr(char *line, t_lem *s, char *n)
