@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/19 13:22:36 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/19 18:53:37 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	num_check(char *s, char *error)
 
 	tmp = ft_strlen(s);
 	i = 0;
+	if (ft_isalpha(s[i]) || (s[i] == '-' && s[i + 1] == '\0'))
+		print_error(error);
 	while (++i < tmp)
 		if (!ft_isdigit(s[i]))
 			print_error(error);
@@ -136,7 +138,6 @@ void	enumerate(t_lem *s)
 	s->dim = i;
 	s->nr = i;
 	init_links(s);
-	//free(tmp);
 }
 
 int		ch_r_name(t_lem *s, char *n)

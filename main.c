@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:27 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/19 13:21:28 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/19 20:46:57 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(void)
 		print_error("no links entered.");
 	if (!se_link(&s, 's') || !se_link(&s, 'e'))
 		print_error("no link to start or end room.");
-	ft_putstr(s.input);
 	algo(&s);
 	LEAK;
 	return (0);

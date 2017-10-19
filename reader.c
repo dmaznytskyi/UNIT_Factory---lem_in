@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:56:56 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/19 12:44:32 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/19 18:42:12 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void	new_link(t_lem *s, char *l1, char *l2)
 		s->c[nr2][nr1] = 1;
 	}
 	else
-		ft_putstr("Warning! Link already exists!\n");
+		print_error("link already exists.");
 }
 
 void	parce_link(t_lem *s, char *line)

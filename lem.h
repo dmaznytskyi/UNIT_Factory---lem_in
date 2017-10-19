@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 13:17:47 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/18 19:20:41 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/19 18:09:39 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include <stdio.h>///////////////
 
-# define LEAK system("leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 2) | cut -d ' ' -f 1) && leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 2) | cut -d ' ' -f 3)");
+# define LEAK system("leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 1) | cut -d ' ' -f 1) && leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 1) | cut -d ' ' -f 2)");
 
 typedef struct	s_r
 {
