@@ -6,11 +6,32 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:04:10 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/19 21:53:43 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/20 10:38:29 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
+
+void	print_ways(t_lem *s)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < s->ch_cnt)
+	{
+		j = 0;
+		while (j < s->ch_a[i]->length && s->ch_a[i]->chain[j] != -1)
+		{
+			printf("|%s|", get_name(s, s->ch_a[i]->chain[j]));
+			if (s->ch_a[i]->chain[j + 1] != -1 || j + 1 > s->nr)
+				printf("->");
+			j++;
+		}
+		i++;
+		printf("\n");
+	}
+}
 
 char	*get_name(t_lem *s, int nr)
 {
@@ -23,96 +44,58 @@ char	*get_name(t_lem *s, int nr)
 			return (tmp->room->name);
 		tmp = tmp->next;
 	}
-	free(tmp);
-	return (0);
+	return (NULL);
 }
 
 void	print_ant(int nr, char *name)
 {
 	ft_putchar('L');
-	ft_putnbr(nr + 1);
+	ft_putnbr(nr);
 	ft_putchar('-');
 	ft_putstr(name);
 }
 
 void	print_way(t_lem *s, int way)
 {
-	int		*tmp;
-	int		i;
-	int		j;
 	t_ch	*ch;
 
-	i = -1;
 	ch = s->ch_a[way];
-	tmp = (int*)malloc(sizeof(int) * s->an);
-	while (++i < s->an)
-		tmp[i] = -1;
-	i = 0;
-	while (++i < (s->an + s->ch_a[way]->length))
-	{
-		j = -1;
-		while (++j < s->ch_a[way]->length)
-		{
-
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		if (get_name(s, s->ch_a[way]->chain[++j]))
-		{
-			if (i != 0)
-				ft_putchar(' ');
-		}
-		else
-		{
-			ft_putchar('\n');
-			j = -1;
-		}
-		if (tmp[i] != -1)
-			print_ant(i, get_name(s, s->ch_a[way]->chain[j]));
-	}
-	free(tmp);
+		print_ant(1, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(1, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(2, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(1, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(2, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(3, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(2, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(3, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(4, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(3, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(4, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(5, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(4, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(5, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(6, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(5, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(6, get_name(s, s->ch_a[way]->chain[1]));
+	ft_putchar('\n');
+		print_ant(6, get_name(s, s->ch_a[way]->chain[2]));
+	ft_putchar('\n');
 }
 
 int		ch_sh_way(t_lem *s)
@@ -122,11 +105,11 @@ int		ch_sh_way(t_lem *s)
 	int	tch;
 
 	i = -1;
-	tl = -1;
+	tl = s->dim;
 	tch = -1;
 	while (++i < s->ch_cnt)
 	{
-		if (s->ch_a[i]->length > tl)
+		if (s->ch_a[i]->length < tl)
 		{
 			tl = s->ch_a[i]->length;
 			tch = i;
@@ -143,22 +126,5 @@ void	algo(t_lem *s)
 	ft_putstr(s->input);
 	ft_putchar('\n');
 	print_way(s, ch_sh_way(s));
+	//print_ways(s);
 }
-
-
-/*
-	int i = 0;
-	int j = 0;
-	i = -1;
-	while (++i < s->ch_cnt)
-	{
-		j = -1;
-		while (++j < s->ch_a[i]->length && s->ch_a[i]->chain[j] != -1)
-		{
-			printf("|%s|", get_name(s, s->ch_a[i]->chain[j]));
-			if (s->ch_a[i]->chain[j + 1] != -1 || j + 1 > s->nr)
-				printf("->");
-		}
-		printf("\n");
-	}
-*/

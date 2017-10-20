@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 16:41:16 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/19 18:53:37 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/20 09:55:18 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,39 +200,6 @@ void	add_to_ar(t_lem *s, int nr)
 		s->vis[i] = nr;
 	}
 }
-/*
-   void	write_to_way_arr(t_lem *s)
-   {
-   t_ch	**new_ch;
-   int		i;
-   int		j;
-
-   j = 0;
-   i = 0;
-   s->ch_cnt++;
-   if (s->ch_a)
-   {
-   new_ch = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
-   while (i < s->ch_cnt - 1)
-   {
-   new_ch[i] = s->ch_a[i];
-   i++;
-   }
-   free(s->ch_a);
-   s->ch_a = new_ch;
-   }
-   else
-   s->ch_a = (t_ch**)malloc(sizeof(t_ch*) * s->ch_cnt);
-   s->ch_a[i] = (t_ch*)malloc(sizeof(t_ch));
-   s->ch_a[i]->chain = (int*)malloc(sizeof(int) * s->nr);
-   s->ch_a[i]->length = 0;
-   while (s->ch_a[i]->length < s->nr)
-   {
-   s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
-   s->ch_a[i]->length += 1;
-   }
-   s->ch_a[i]->chain[s->ch_a[i]->length] = get_e(s);
-   }*/
 
 void write_to_way_arr(t_lem *s)
 {
@@ -261,11 +228,19 @@ void write_to_way_arr(t_lem *s)
 	s->ch_a[i] = (t_ch*)malloc(sizeof(t_ch));
 	s->ch_a[i]->chain = (int*)malloc(sizeof(int) * s->nr);
 	s->ch_a[i]->length = 0;
-	while (s->ch_a[i]->length < s->nr)
-	{
-		s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
-		s->ch_a[i]->length += 1;
-	}
+//	while (s->ch_a[i]->length - 1 < s->nr)
+//	{
+//		s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
+//		s->ch_a[i]->length += 1;
+//	}
+	while (s->ch_a[i]->length - 1 < s->nr)
+		if (s->vis[s->ch_a[i]->length] != -1)
+		{
+			s->ch_a[i]->chain[s->ch_a[i]->length] = s->vis[s->ch_a[i]->length];
+			s->ch_a[i]->length += 1;
+		}
+		else
+			break ;
 	s->ch_a[i]->chain[s->ch_a[i]->length - 1] = get_e(s);
 }
 
