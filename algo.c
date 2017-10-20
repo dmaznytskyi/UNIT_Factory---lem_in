@@ -6,7 +6,7 @@
 /*   By: dmaznyts <dmaznyts@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 22:04:10 by dmaznyts          #+#    #+#             */
-/*   Updated: 2017/10/20 10:38:29 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/10/20 11:03:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,43 @@ char	*get_name(t_lem *s, int nr)
 void	print_ant(int nr, char *name)
 {
 	ft_putchar('L');
-	ft_putnbr(nr);
+	ft_putnbr(nr + 1);
 	ft_putchar('-');
 	ft_putstr(name);
 }
 
 void	print_way(t_lem *s, int way)
 {
+	int		i;
+	int		j;
+	int		k;
 	t_ch	*ch;
 
+	i = -1;
+	j = -1;
+	k = s->ch_a[way]->length - 1;
 	ch = s->ch_a[way];
+	while (++i < s->an - 1)
+	{
+		j = -1;
+		while (++j < s->ch_a[way]->length)
+		{
+			print_ant(i + j, get_name(s, s->ch_a[way]->chain[j]));
+			if (j < k)
+				ft_putchar(' ');
+		}
+		ft_putchar('\n');
+	}
+	ft_putchar('\n');
+	ft_putchar('\n');
+		print_ant(0, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(0, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
 		print_ant(1, get_name(s, s->ch_a[way]->chain[0]));
 	ft_putchar('\n');
+		print_ant(0, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
 		print_ant(1, get_name(s, s->ch_a[way]->chain[1]));
 			ft_putchar(' ');
 		print_ant(2, get_name(s, s->ch_a[way]->chain[0]));
@@ -93,8 +118,26 @@ void	print_way(t_lem *s, int way)
 		print_ant(5, get_name(s, s->ch_a[way]->chain[2]));
 			ft_putchar(' ');
 		print_ant(6, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(7, get_name(s, s->ch_a[way]->chain[0]));
 	ft_putchar('\n');
 		print_ant(6, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(7, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(8, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(7, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(8, get_name(s, s->ch_a[way]->chain[1]));
+			ft_putchar(' ');
+		print_ant(9, get_name(s, s->ch_a[way]->chain[0]));
+	ft_putchar('\n');
+		print_ant(8, get_name(s, s->ch_a[way]->chain[2]));
+			ft_putchar(' ');
+		print_ant(9, get_name(s, s->ch_a[way]->chain[1]));
+	ft_putchar('\n');
+		print_ant(9, get_name(s, s->ch_a[way]->chain[2]));
 	ft_putchar('\n');
 }
 
